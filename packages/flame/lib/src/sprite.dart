@@ -20,13 +20,23 @@ class Sprite {
   Image image;
   Rect src = Rect.zero;
 
+  // represents the original rectangle of the sprite in a trimmed spritesheet.
+  // For example: if sprite is originally 16x16, but trimmed down to 8x8, we can
+  // capture the original size and offset into the 16x16 rect to reproduce the
+  // correct positioning of this sprite in 16x16.
+  Rect untrimmedSrc = Rect.zero;
+
   Sprite(
     this.image, {
     Vector2? srcPosition,
     Vector2? srcSize,
+    Vector2? untrimmedPosition,
+    Vector2? untrimmedSize,
   }) {
     this.srcSize = srcSize;
     this.srcPosition = srcPosition;
+    this.untrimmedPosition = untrimmedPosition;
+    this.untrimmedSize = untrimmedSize;
   }
 
   /// Takes a path of an image, a [srcPosition] and [srcSize] and loads the
@@ -60,6 +70,18 @@ class Sprite {
 
   set srcPosition(Vector2? position) {
     src = (position ?? Vector2.zero()).toPositionedRect(srcSize);
+  }
+
+  Vector2 get untrimmedSize => Vector2(untrimmedSrc.width, untrimmedSrc.height);
+
+  set untrimmedSize(Vector2? size) {
+    untrimmedSrc = untrimmedPosition.toPositionedRect(size ?? srcSize);
+  }
+
+  Vector2 get untrimmedPosition => untrimmedSrc.topLeft.toVector2();
+
+  set untrimmedPosition(Vector2? position) {
+    untrimmedSrc = (position ?? Vector2.zero()).toPositionedRect(untrimmedSize);
   }
 
   /// Same as [render], but takes both the position and the size as a single
@@ -100,7 +122,8 @@ class Sprite {
     final drawPosition = position ?? Vector2.zero();
     final drawSize = size ?? srcSize;
 
-    final delta = anchor.toVector2()..multiply(drawSize);
+    final delta =
+        (anchor.toVector2()..multiply(untrimmedSize)) - untrimmedPosition;
     final drawRect = (drawPosition - delta).toPositionedRect(drawSize);
 
     final drawPaint = overridePaint ?? paint;
