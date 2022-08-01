@@ -17,7 +17,7 @@ void main() {
       for (var i = 0; i < 20; i++) {
         player.position.add(Vector2(i * 5.0, 20.0 - i));
         game.update(0.01);
-        expect(camera.viewfinder.position, closeToVector(player.x, player.y));
+        expect(camera.viewfinder.position, closeToVector(player.position));
       }
     });
 
@@ -56,18 +56,18 @@ void main() {
 
       camera.moveTo(Vector2(100, 0), speed: 5);
       for (var i = 0; i < 10; i++) {
-        expect(camera.viewfinder.position, closeToVector(0.5 * i, 0));
+        expect(camera.viewfinder.position, closeToVector(Vector2(0.5 * i, 0)));
         game.update(0.1);
       }
       camera.moveTo(Vector2(5, 200), speed: 10);
       for (var i = 0; i < 10; i++) {
-        expect(camera.viewfinder.position, closeToVector(5, 1.0 * i));
+        expect(camera.viewfinder.position, closeToVector(Vector2(5, 1.0 * i)));
         game.update(0.1);
       }
       expect(camera.viewfinder.children.length, 1);
     });
 
-    testWithFlameGame('setBound', (game) async {
+    testWithFlameGame('setBounds', (game) async {
       final world = World()..addToParent(game);
       final camera = CameraComponent(world: world)..addToParent(game);
       await game.ready();
@@ -78,11 +78,11 @@ void main() {
       expect(camera.viewfinder.position, Vector2(10, 10));
       camera.viewfinder.position = Vector2(-10, 10);
       game.update(0);
-      expect(camera.viewfinder.position, closeToVector(0, 10, epsilon: 0.5));
+      expect(camera.viewfinder.position, closeToVector(Vector2(0, 10), 0.5));
 
       camera.moveTo(Vector2(-20, 0), speed: 10);
       for (var i = 0; i < 20; i++) {
-        expect(camera.viewfinder.position, closeToVector(0, 10, epsilon: 0.5));
+        expect(camera.viewfinder.position, closeToVector(Vector2(0, 10), 0.5));
         game.update(0.5);
       }
 
@@ -104,6 +104,51 @@ void main() {
       expect(
         camera.viewfinder.firstChild<BoundedPositionBehavior>(),
         isNull,
+      );
+    });
+
+    testWithFlameGame('componentsAtPoint', (game) async {
+      final world = World();
+      final camera = CameraComponent(
+        world: world,
+        viewport: FixedSizeViewport(600, 400),
+      )
+        ..viewport.anchor = Anchor.center
+        ..viewport.position = Vector2(400, 300)
+        ..viewfinder.position = Vector2(100, 50);
+      final component = PositionComponent(
+        size: Vector2(300, 100),
+        position: Vector2(50, 30),
+      );
+      world.add(component);
+      game.addAll([world, camera]);
+      await game.ready();
+
+      final nested = <Vector2>[];
+      final it = game.componentsAtPoint(Vector2(400, 300), nested).iterator;
+      expect(it.moveNext(), true);
+      expect(it.current, component);
+      expect(nested, [Vector2(400, 300), Vector2(100, 50), Vector2(50, 20)]);
+      expect(it.moveNext(), true);
+      expect(it.current, world);
+      expect(nested, [Vector2(400, 300), Vector2(100, 50)]);
+      expect(it.moveNext(), true);
+      expect(it.current, camera.viewport);
+      expect(nested, [Vector2(400, 300), Vector2(300, 200)]);
+      expect(it.moveNext(), true);
+      expect(it.current, game);
+      expect(nested, [Vector2(400, 300)]);
+      expect(it.moveNext(), false);
+
+      // Check that `componentsAtPoint` is usable with non-top-level components
+      // also.
+      expect(
+        world.componentsAtPoint(Vector2(100, 100)).toList(),
+        [component, world],
+      );
+      expect(
+        component.componentsAtPoint(Vector2(100, 50)).toList(),
+        [component],
       );
     });
   });

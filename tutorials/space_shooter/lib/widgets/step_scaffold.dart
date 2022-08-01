@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 
-import 'code_block.dart';
+import 'package:tutorials_space_shooter/widgets/code_block.dart';
 
 class StepScaffold extends StatelessWidget {
   final List<String> tutorial;
   final Widget game;
 
   const StepScaffold({
-    Key? key,
+    super.key,
     required this.tutorial,
     required this.game,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import '../extensions/vector2.dart';
-import 'particle.dart';
+import 'package:flame/src/extensions/vector2.dart';
+import 'package:flame/src/particles/particle.dart';
 
 /// A [Particle] which renders given [Image] on a [Canvas] image is centered.
 /// If any other behavior is needed, consider using ComputedParticle.
@@ -15,8 +15,8 @@ class ImageParticle extends Particle {
   ImageParticle({
     required this.image,
     Vector2? size,
-    double? lifespan,
-  }) : super(lifespan: lifespan) {
+    super.lifespan,
+  }) {
     final srcWidth = image.width.toDouble();
     final srcHeight = image.height.toDouble();
     final destWidth = size?.x ?? srcWidth;

@@ -1,8 +1,8 @@
-import '../../components.dart';
-import 'controllers/effect_controller.dart';
-import 'effect.dart';
-import 'effect_target.dart';
-import 'provider_interfaces.dart';
+import 'package:flame/components.dart';
+import 'package:flame/src/effects/controllers/effect_controller.dart';
+import 'package:flame/src/effects/effect.dart';
+import 'package:flame/src/effects/effect_target.dart';
+import 'package:flame/src/effects/provider_interfaces.dart';
 
 /// Change the size of a component over time.
 ///
@@ -18,10 +18,10 @@ class SizeEffect extends Effect with EffectTarget<SizeProvider> {
   /// size at the same time.
   SizeEffect.by(
     Vector2 offset,
-    EffectController controller, {
+    super.controller, {
     SizeProvider? target,
-  })  : _offset = offset.clone(),
-        super(controller) {
+    super.onComplete,
+  }) : _offset = offset.clone() {
     this.target = target;
   }
 
@@ -31,8 +31,12 @@ class SizeEffect extends Effect with EffectTarget<SizeProvider> {
   /// of the affected component is `Vector2(100, 100)` at the start of the
   /// affected the effect will peak when the size is `Vector2(200, 100)`, if
   /// there is nothing else affecting the size at the same time.
-  factory SizeEffect.to(Vector2 targetSize, EffectController controller) =>
-      _SizeToEffect(targetSize, controller);
+  factory SizeEffect.to(
+    Vector2 targetSize,
+    EffectController controller, {
+    void Function()? onComplete,
+  }) =>
+      _SizeToEffect(targetSize, controller, onComplete: onComplete);
 
   Vector2 _offset;
 
@@ -48,9 +52,16 @@ class SizeEffect extends Effect with EffectTarget<SizeProvider> {
 class _SizeToEffect extends SizeEffect {
   final Vector2 _targetSize;
 
-  _SizeToEffect(Vector2 targetSize, EffectController controller)
-      : _targetSize = targetSize.clone(),
-        super.by(Vector2.zero(), controller);
+  _SizeToEffect(
+    Vector2 targetSize,
+    EffectController controller, {
+    void Function()? onComplete,
+  })  : _targetSize = targetSize.clone(),
+        super.by(
+          Vector2.zero(),
+          controller,
+          onComplete: onComplete,
+        );
 
   @override
   void onStart() {

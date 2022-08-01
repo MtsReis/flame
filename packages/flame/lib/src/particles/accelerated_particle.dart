@@ -1,7 +1,7 @@
-import '../../extensions.dart';
-import '../components/mixins/single_child_particle.dart';
-import 'curved_particle.dart';
-import 'particle.dart';
+import 'package:flame/extensions.dart';
+import 'package:flame/src/components/mixins/single_child_particle.dart';
+import 'package:flame/src/particles/curved_particle.dart';
+import 'package:flame/src/particles/particle.dart';
 
 /// A particle that serves as a container for basic acceleration physics.
 ///
@@ -26,11 +26,10 @@ class AcceleratedParticle extends CurvedParticle with SingleChildParticle {
     Vector2? acceleration,
     Vector2? speed,
     Vector2? position,
-    double? lifespan,
+    super.lifespan,
   })  : acceleration = acceleration ?? Vector2.zero(),
         position = position ?? Vector2.zero(),
-        speed = speed ?? Vector2.zero(),
-        super(lifespan: lifespan);
+        speed = speed ?? Vector2.zero();
 
   @override
   void render(Canvas canvas) {

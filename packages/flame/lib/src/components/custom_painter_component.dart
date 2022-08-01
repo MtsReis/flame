@@ -1,6 +1,5 @@
+import 'package:flame/components.dart';
 import 'package:flutter/widgets.dart';
-
-import '../../components.dart';
 
 /// A [PositionComponent] that renders a [CustomPainter] at the designated
 /// position, scaled to have the designated size and rotated to the specified
@@ -17,22 +16,14 @@ class CustomPainterComponent extends PositionComponent {
 
   CustomPainterComponent({
     this.painter,
-    Vector2? position,
-    Vector2? size,
-    Vector2? scale,
-    double? angle,
-    Anchor? anchor,
-    Iterable<Component>? children,
-    int? priority,
-  }) : super(
-          position: position,
-          size: size,
-          scale: scale,
-          angle: angle,
-          anchor: anchor,
-          children: children,
-          priority: priority,
-        );
+    super.position,
+    super.size,
+    super.scale,
+    super.angle,
+    super.anchor,
+    super.children,
+    super.priority,
+  });
 
   @override
   @mustCallSuper

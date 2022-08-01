@@ -1,7 +1,8 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui';
 
-import 'package:flame/assets.dart';
+import 'package:flame/cache.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame_fire_atlas/flame_fire_atlas.dart';
@@ -24,7 +25,7 @@ class MockedGame extends Mock implements FlameGame {
   AssetsCache get assets => _assetsMock;
 }
 
-Future<List<int>> readExampleFile() async {
+Future<Uint8List> readExampleFile() async {
   final exampleAtlas = File('./example/assets/caveace.fa');
   final bytes = await exampleAtlas.readAsBytes();
   return bytes;

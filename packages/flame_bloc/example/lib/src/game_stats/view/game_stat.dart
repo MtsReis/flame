@@ -1,9 +1,9 @@
+import 'package:flame_bloc_example/src/game_stats/bloc/game_stats_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/game_stats_bloc.dart';
 
 class GameStat extends StatelessWidget {
-  const GameStat({Key? key}) : super(key: key);
+  const GameStat({super.key});
 
   @override
   Widget build(BuildContext context) {

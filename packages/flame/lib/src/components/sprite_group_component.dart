@@ -1,9 +1,9 @@
 import 'dart:ui';
 
+import 'package:flame/components.dart';
+import 'package:flame/src/effects/provider_interfaces.dart';
 import 'package:meta/meta.dart';
 
-import '../../components.dart';
-import '../effects/provider_interfaces.dart';
 export '../sprite_animation.dart';
 
 /// A [PositionComponent] that can have multiple [Sprite]s and render
@@ -22,22 +22,14 @@ class SpriteGroupComponent<T> extends PositionComponent
     this.sprites,
     this.current,
     Paint? paint,
-    Vector2? position,
-    Vector2? size,
-    Vector2? scale,
-    double? angle,
-    Anchor? anchor,
-    Iterable<Component>? children,
-    int? priority,
-  }) : super(
-          position: position,
-          size: size,
-          scale: scale,
-          angle: angle,
-          anchor: anchor,
-          children: children,
-          priority: priority,
-        ) {
+    super.position,
+    super.size,
+    super.scale,
+    super.angle,
+    super.anchor,
+    super.children,
+    super.priority,
+  }) {
     if (paint != null) {
       this.paint = paint;
     }

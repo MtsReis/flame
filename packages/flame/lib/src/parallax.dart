@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:collection/collection.dart';
+import 'package:flame/cache.dart';
+import 'package:flame/extensions.dart';
+import 'package:flame/game.dart';
+import 'package:flame/src/flame.dart';
+import 'package:flame/src/sprite_animation.dart';
 import 'package:flutter/painting.dart';
-
-import '../game.dart';
-import 'assets/images.dart';
-import 'extensions/canvas.dart';
-import 'extensions/image.dart';
-import 'flame.dart';
-import 'sprite_animation.dart';
 
 extension ParallaxExtension on Game {
   Future<Parallax> loadParallax(
@@ -119,16 +117,11 @@ class ParallaxImage extends ParallaxRenderer {
 
   ParallaxImage(
     this._image, {
-    ImageRepeat? repeat,
-    Alignment? alignment,
-    LayerFill? fill,
-    FilterQuality? filterQuality,
-  }) : super(
-          repeat: repeat,
-          alignment: alignment,
-          fill: fill,
-          filterQuality: filterQuality,
-        );
+    super.repeat,
+    super.alignment,
+    super.fill,
+    super.filterQuality,
+  });
 
   /// Takes a path of an image, and optionally arguments for how the image
   /// should repeat ([repeat]), which edge it should align with ([alignment]),
@@ -174,14 +167,10 @@ class ParallaxAnimation extends ParallaxRenderer {
   ParallaxAnimation(
     this._animation,
     this._prerenderedFrames, {
-    ImageRepeat? repeat,
-    Alignment? alignment,
-    LayerFill? fill,
-  }) : super(
-          repeat: repeat,
-          alignment: alignment,
-          fill: fill,
-        );
+    super.repeat,
+    super.alignment,
+    super.fill,
+  });
 
   /// Takes a path of an image, a SpriteAnimationData, and optionally arguments
   /// for how the image should repeat ([repeat]), which edge it should align

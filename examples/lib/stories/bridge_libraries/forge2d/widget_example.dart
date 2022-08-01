@@ -1,9 +1,8 @@
+import 'package:examples/stories/bridge_libraries/forge2d/utils/boundaries.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_forge2d/flame_forge2d.dart' hide Transform;
 import 'package:flutter/material.dart';
-
-import 'utils/boundaries.dart';
 
 class WidgetExample extends Forge2DGame with TapDetector {
   static const String description = '''
@@ -62,7 +61,7 @@ class WidgetExample extends Forge2DGame with TapDetector {
 }
 
 class BodyWidgetExample extends StatelessWidget {
-  const BodyWidgetExample({Key? key}) : super(key: key);
+  const BodyWidgetExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,8 +87,8 @@ class BodyButtonWidget extends StatefulWidget {
   const BodyButtonWidget(
     this._game,
     this._bodyId, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() {

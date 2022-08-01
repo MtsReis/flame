@@ -29,8 +29,8 @@ class _DoubleTapGame extends FlameGame with DoubleTapDetector {
 }
 
 void main() {
-  final tapGame = FlameTester(() => _TapGame());
-  final doubleTapGame = FlameTester(() => _DoubleTapGame());
+  final tapGame = FlameTester(_TapGame.new);
+  final doubleTapGame = FlameTester(_DoubleTapGame.new);
 
   group('GameWidget - TapDetectors', () {
     tapGame.testGameWidget(
@@ -52,7 +52,7 @@ void main() {
       verify: (game, tester) async {
         expect(game.doubleTapRegistered, isTrue);
         final tapVector = tapPosition.toVector2();
-        expect(game.doubleTapPosition, closeToVector(tapVector.x, tapVector.y));
+        expect(game.doubleTapPosition, closeToVector(tapVector));
       },
     );
   });

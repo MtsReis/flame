@@ -1,9 +1,9 @@
+import 'package:flame/components.dart';
+import 'package:flame/src/events/flame_game_mixins/has_tappables_bridge.dart';
+import 'package:flame/src/game/mixins/has_tappables.dart';
+import 'package:flame/src/gestures/events.dart';
 import 'package:flutter/gestures.dart';
 import 'package:meta/meta.dart';
-
-import '../../../components.dart';
-import '../../game/mixins/has_tappables.dart';
-import '../../gestures/events.dart';
 
 /// Mixin that can be added to any [Component] allowing it to receive tap
 /// events.
@@ -59,8 +59,9 @@ mixin Tappable on Component {
   @mustCallSuper
   void onMount() {
     super.onMount();
+    final game = findGame()!;
     assert(
-      findGame()! is HasTappables,
+      game is HasTappables || game is HasTappablesBridge,
       'Tappable components can only be added to a FlameGame with HasTappables',
     );
   }

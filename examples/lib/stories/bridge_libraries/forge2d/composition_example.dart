@@ -1,12 +1,11 @@
+import 'package:examples/stories/bridge_libraries/forge2d/utils/balls.dart';
+import 'package:examples/stories/bridge_libraries/forge2d/utils/boundaries.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
-
-import 'utils/balls.dart';
-import 'utils/boundaries.dart';
 
 const TextStyle _textStyle = TextStyle(color: Colors.white, fontSize: 2);
 
@@ -70,7 +69,7 @@ class TappableBall extends Ball with Tappable {
   int counter = 0;
   late final TextPaint _textPaint;
 
-  TappableBall(Vector2 position) : super(position) {
+  TappableBall(super.position) {
     originalPaint = Paint()..color = Colors.amber;
     paint = originalPaint;
   }
