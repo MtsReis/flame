@@ -1,5 +1,5 @@
-import '../../../collisions.dart';
-import '../../../components.dart';
+import 'package:flame/collisions.dart';
+import 'package:flame/components.dart';
 
 /// In this [PositionComponent] hitboxes can be added to emulate a hitbox
 /// that is a composition of other hitboxes.
@@ -11,20 +11,12 @@ import '../../../components.dart';
 class CompositeHitbox extends PositionComponent
     with CollisionCallbacks, CollisionPassthrough {
   CompositeHitbox({
-    Vector2? position,
-    Vector2? size,
-    Vector2? scale,
-    double? angle,
-    Anchor? anchor,
-    Iterable<ShapeHitbox>? children,
-    int? priority,
-  }) : super(
-          position: position,
-          size: size,
-          scale: scale,
-          angle: angle,
-          anchor: anchor,
-          children: children,
-          priority: priority,
-        );
+    super.position,
+    super.size,
+    super.scale,
+    super.angle,
+    super.anchor,
+    Iterable<ShapeHitbox>? super.children,
+    super.priority,
+  });
 }

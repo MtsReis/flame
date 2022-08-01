@@ -8,6 +8,10 @@ packages:
   - doc/**
 
 command:
+  bootstrap:
+    # Uses the pubspec_overrides.yaml instead of having Melos modifying the lock file.
+    usePubspecOverrides: true
+
   version:
     # Generate commit links in package changelogs.
     linkToCommits: true
@@ -57,3 +61,9 @@ scripts:
     select-package:
       dir-exists: test
     description: Generate coverage for the selected package.
+
+  update-goldens:
+    run: melos exec -- flutter test --update-goldens
+    select-package:
+      dir-exists: test
+    description: Re-generate all golden test files

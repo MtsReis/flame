@@ -1,11 +1,10 @@
+import 'package:examples/stories/bridge_libraries/forge2d/utils/balls.dart';
+import 'package:examples/stories/bridge_libraries/forge2d/utils/boundaries.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart' hide Draggable;
-
-import 'utils/balls.dart';
-import 'utils/boundaries.dart';
 
 class DraggableExample extends Forge2DGame with HasDraggables {
   static const description = '''
@@ -26,7 +25,7 @@ class DraggableExample extends Forge2DGame with HasDraggables {
 }
 
 class DraggableBall extends Ball with Draggable {
-  DraggableBall(Vector2 position) : super(position, radius: 5) {
+  DraggableBall(super.position) : super(radius: 5) {
     originalPaint = Paint()..color = Colors.amber;
     paint = originalPaint;
   }

@@ -1,9 +1,7 @@
-import 'package:flutter/animation.dart';
-
-import '../../extensions.dart';
-import '../components/mixins/single_child_particle.dart';
-import '../particles/curved_particle.dart';
-import 'particle.dart';
+import 'package:flame/extensions.dart';
+import 'package:flame/src/components/mixins/single_child_particle.dart';
+import 'package:flame/src/particles/curved_particle.dart';
+import 'package:flame/src/particles/particle.dart';
 
 /// Statically move given child [Particle] by given [Vector2].
 ///
@@ -19,10 +17,9 @@ class MovingParticle extends CurvedParticle with SingleChildParticle {
     required this.child,
     required this.to,
     Vector2? from,
-    double? lifespan,
-    Curve curve = Curves.linear,
-  })  : from = from ?? Vector2.zero(),
-        super(lifespan: lifespan, curve: curve);
+    super.lifespan,
+    super.curve,
+  }) : from = from ?? Vector2.zero();
 
   /// Used to avoid creating new [Vector2] objects in [update].
   static final _tmpVector = Vector2.zero();

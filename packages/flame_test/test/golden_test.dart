@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Golden tests', () {
-    final tester = FlameTester(() => FlameGame());
+    final tester = FlameTester(FlameGame.new);
 
     tester.testGameWidget(
       'renders correctly',
@@ -25,6 +25,36 @@ void main() {
           matchesGoldenFile('golden_test.png'),
         );
       },
+    );
+
+    testGolden(
+      'Same test but with testGolden',
+      (game) async {
+        final paint = Paint()..color = Colors.white;
+        game.add(
+          CircleComponent(radius: 10, position: Vector2.all(100), paint: paint),
+        );
+      },
+      goldenFile: 'golden_test.png',
+    );
+
+    testGolden(
+      'Same test, but with smaller size',
+      (game) async {
+        final paint = Paint()..color = Colors.white;
+        game.add(
+          CircleComponent(radius: 10, position: Vector2.all(100), paint: paint),
+        );
+      },
+      size: Vector2(200, 200),
+      goldenFile: 'golden_test_small.png',
+    );
+
+    testGolden(
+      'skipped test',
+      (game) async {},
+      goldenFile: 'golden_test.png',
+      skip: true,
     );
   });
 }

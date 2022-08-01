@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'particle.dart';
+import 'package:flame/src/particles/particle.dart';
 
 /// A single [Particle] which manages multiple children
 /// by proxying all lifecycle hooks.
@@ -9,10 +9,8 @@ class ComposedParticle extends Particle {
 
   ComposedParticle({
     required this.children,
-    double? lifespan,
-  }) : super(
-          lifespan: lifespan,
-        );
+    super.lifespan,
+  });
 
   @override
   void setLifespan(double lifespan) {

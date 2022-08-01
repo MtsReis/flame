@@ -1,13 +1,15 @@
-import '../../components.dart';
-import 'controllers/effect_controller.dart';
-import 'effect.dart';
+import 'package:flame/components.dart';
+import 'package:flame/src/effects/effect.dart';
 
 /// Base class for effects that target a [Component] of type [T].
 ///
 /// A general abstraction for creating effects targeting [Component]s, currently
 /// used by `SizeEffect`, `OpacityEffect` and `Transform2DEffect`.
 abstract class ComponentEffect<T extends Component> extends Effect {
-  ComponentEffect(EffectController controller) : super(controller);
+  ComponentEffect(
+    super.controller, {
+    super.onComplete,
+  });
 
   late T target;
 

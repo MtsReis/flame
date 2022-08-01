@@ -1,12 +1,11 @@
 import 'dart:ui';
 
-import '../anchor.dart';
-import '../extensions/vector2.dart';
-import '../sprite.dart';
-import 'particle.dart';
+import 'package:flame/src/anchor.dart';
+import 'package:flame/src/extensions/vector2.dart';
+import 'package:flame/src/particles/particle.dart';
+import 'package:flame/src/sprite.dart';
 
 export '../sprite.dart';
-
 export '../sprite.dart';
 
 class SpriteParticle extends Particle {
@@ -18,10 +17,8 @@ class SpriteParticle extends Particle {
     required this.sprite,
     this.size,
     this.overridePaint,
-    double? lifespan,
-  }) : super(
-          lifespan: lifespan,
-        );
+    super.lifespan,
+  });
 
   @override
   void render(Canvas canvas) {

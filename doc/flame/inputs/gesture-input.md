@@ -29,6 +29,11 @@ of these `mixin`s and its methods:
   - onSecondaryTapUp
   - onSecondaryTapCancel
 
+- TertiaryTapDetector
+  - onTertiaryTapDown
+  - onTertiaryTapUp
+  - onTertiaryTapCancel
+
 - DoubleTapDetector
   - onDoubleTap
 
@@ -216,7 +221,7 @@ class MyGame extends Game with TapDetector {
 ```
 
 You can also check more complete examples
-[here](https://github.com/flame-engine/flame/tree/main/examples/lib/stories/controls/).
+[here](https://github.com/flame-engine/flame/tree/main/examples/lib/stories/input/).
 
 
 ## Tappable, Draggable and Hoverable components
@@ -482,4 +487,4 @@ More information about how to define hitboxes can be found in the hitbox section
 [collision detection](../collision_detection.md#shapehitbox) docs.
 
 An example of how to use it can be seen
-[here](https://github.com/flame-engine/flame/tree/main/examples/lib/stories/input/gesture_hitboxes_example).
+[here](https://github.com/flame-engine/flame/blob/main/examples/lib/stories/input/gesture_hitboxes_example.dart).
