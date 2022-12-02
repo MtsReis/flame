@@ -11,7 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
   flame: ^1.1.1
-  oxygen: ^0.2.0
+  oxygen:
+    git:
+      url: https://github.com/natebot13/oxygen.git
+      ref: hasnot-fix
 
 dev_dependencies:
   dartdoc: ^4.1.0
